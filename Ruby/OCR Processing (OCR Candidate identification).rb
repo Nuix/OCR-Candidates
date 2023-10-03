@@ -1,4 +1,4 @@
-# Menu Title: OCR Processing v1.3
+# Menu Title: OCR Processing v1.4
 
 
 #==================================================================================================
@@ -209,17 +209,17 @@ def export_native(item, export_dir, extension)
     item.addTag(EXPORT_FOR_OCR_TAG)
     $number_items_exported += 1
   rescue
-    puts "ERROR: item with guid #{item.guid} of type: #{item.mime_type} could not be exported."
+    puts "ERROR: item with guid #{item.guid} of type: #{item.getType().getName()} could not be exported."
     $number_items_failed_export += 1
   end
 end
 
 def export_native_pdf_tiff(export_dir, item)
-  extension = MIMETYPE_TO_EXTENSION_HASH[item.mime_type]
+  extension = MIMETYPE_TO_EXTENSION_HASH[item.getType().getName()]
   if extension != nil
     export_native(item, export_dir, extension)
   else
-    puts "Skipping item with guid: " + item.guid + " of type: " + item.mime_type + " which is not an image file."
+    puts "Skipping item with guid: " + item.guid + " of type: " + item.getType().getName() + " which is not an image file."
     $number_unsupported_items += 1
   end
 end
